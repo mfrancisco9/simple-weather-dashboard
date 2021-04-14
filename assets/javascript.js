@@ -7,10 +7,11 @@ var key = "9d0408c1b72df0440eea79041dfc4aeb";
 var recentSearches = JSON.parse(localStorage.getItem('searchHistory')) || [];  //if localstorage contains an array, set recentSearches to be that array, otherwise set it to be []
 
 //var recentSearches = localStorage.getItem('searchHistory') ? JSON.parse(localStorage.getItem('searchHistory')) : [];
-
+if (recentSearches != [])
+{
 $("#recentcities").append(`<div class='card-content recent-city'>${recentSearches[recentSearches.length -1]}</div>`)
 $("#recentcities").append(`<div class='card-content recent-city'>${recentSearches[recentSearches.length -2]}</div>`)
-$("#recentcities").append(`<div class='card-content recent-city'>${recentSearches[recentSearches.length -3]}</div>`)
+$("#recentcities").append(`<div class='card-content recent-city'>${recentSearches[recentSearches.length -3]}</div>`)}
 
 $("#citysearchbtn").on("click", function() {
     console.log(city);
@@ -25,12 +26,7 @@ $("#citysearchbtn").on("click", function() {
         recentSearches.push(city);
         localStorage.setItem("searchHistory", JSON.stringify(recentSearches));
         console.log(localStorage.getItem("searchHistory"));
-    //We need to put an array in local storage: 
-    //.push(city) into recentSearches
-    //set it to localStorage with name "searchHistory"
-    // 1st time opening app :   "chicago" and it gets put into local storage  => [chicago]
-    // end time openning app: "Milwaukee" and it gets put into local storage  =>  [milwaukee]
-        //localStorage.setItem("searchHistory", JSON.stringify(recentSearches))
+   
     
     $("#recentcities").append(`<div class='card-content'>${recentSearches[recentSearches.length -1]}</div>`)
 
