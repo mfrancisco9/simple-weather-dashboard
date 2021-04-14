@@ -12,8 +12,6 @@ $("#recentcities").append(`<div class='card-content recent-city'>${recentSearche
 $("#recentcities").append(`<div class='card-content recent-city'>${recentSearches[recentSearches.length -2]}</div>`)
 $("#recentcities").append(`<div class='card-content recent-city'>${recentSearches[recentSearches.length -3]}</div>`)
 
-
-console.log(five);
 $("#citysearchbtn").on("click", function() {
     console.log(city);
     city = $("#searchbox").val();
@@ -70,12 +68,14 @@ $("#citysearchbtn").on("click", function() {
                     var boxHumid = $("<div>" + (nextdata)['daily'][i]['humidity'] + "% humidity </div>");
                     var boxWind = $("<div>" + (nextdata)['daily'][i]['wind_speed'] + "mph wind</div>");
                     var boxUV = $("<div>" + (nextdata)['daily'][i]['uvi'] + "UV index</div>");
+                    var boxIcon = $("<div><img src='http://openweathermap.org/img/w/"+(nextdata)['daily'][i]['weather'][0]['icon']+".png'></div>");
 
                     $("#fiveblocks").children().eq(i).children().append(boxDate);
                     $("#fiveblocks").children().eq(i).children().append(boxTemp);
                     $("#fiveblocks").children().eq(i).children().append(boxHumid);
                     $("#fiveblocks").children().eq(i).children().append(boxWind);
                     $("#fiveblocks").children().eq(i).children().append(boxUV);
+                    $("#fiveblocks").children().eq(i).children().append(boxIcon);
 
 
                   
@@ -88,3 +88,10 @@ $("#citysearchbtn").on("click", function() {
 });
 }
 });
+
+$(".recent-city").on("click", function() {
+    console.log(this);
+    console.log(this.val());
+    console.log(this.text());
+    $("#searchbox").val("test");
+})
