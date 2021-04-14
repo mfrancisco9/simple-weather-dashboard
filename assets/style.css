@@ -8,3 +8,7 @@
     align-content: space-around;
     justify-content: center;
 }
+
+#mainbodybox {
+    width: 95vw;
+}

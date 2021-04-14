@@ -20,6 +20,7 @@ $("#citysearchbtn").on("click", function() {
     for (i=0; i < $("#today").length; i++)
         { $("#today").children(i).remove();
           $("#fiveblocks").children(i).children().children().remove();
+          $("#fiveblocks").children(i).removeClass();
         }     
         recentSearches.push(city);
         localStorage.setItem("searchHistory", JSON.stringify(recentSearches));
@@ -42,7 +43,8 @@ $("#citysearchbtn").on("click", function() {
     })
     .then(function (data) {
         console.log(data)
-        var yourCity = $("<h2>" + (data)['name'] + "</h2>");
+        console.log((data)['weather'][0]['icon']);
+        var yourCity = $("<h2>" + (data)['name'] +"<img src='http://openweathermap.org/img/w/"+(data)['weather'][0]['icon']+".png'></h2>");
         var lat = (data)['coord']['lat'];
         var lon = (data)['coord']['lon'];
         var mainTemp = $("<h3>" + Math.floor((data)['main']['temp']) + "°F</h3>");
@@ -56,15 +58,23 @@ $("#citysearchbtn").on("click", function() {
             })
             .then(function (nextdata) {
                 console.log(nextdata);
-                var mainWeather = (nextdata)['current']['weather']['main'];
+                var mainWeather = (nextdata)['current']['weather']['icon'];
                 var mainUV = (nextdata)['daily'][0]['uvi'];
                 var mainUVI = $("<h5>" + mainUV + " UV index</h5>")
                 
             $("#today").append(yourCity).append(mainTemp).append(mainHumid).append(mainWind).append(mainUVI);
                 
+                if (mainUV > 7) {
+                    $("#today").children().eq(4).addClass("red-text")
+                } else if (mainUV > 4) {
+                    $("#today").children().eq(4).addClass("yellow")
+                } else {
+                    $("#today").children().eq(4).addClass("green-text")
+                }
+
                 for (i=0; i < $("#fiveblocks").children().length; i++) {
                     var boxDate = $("<div>" + moment.unix((nextdata)['daily'][i]['dt']).format("MM/DD") + "</div>");
-                    var boxTemp = ("<div>" + (nextdata)['daily'][i]['temp']['day'] + "°F</div>");
+                    var boxTemp = ("<div>" + Math.floor((nextdata)['daily'][i]['temp']['day']) + "°F</div>");
                     var boxHumid = $("<div>" + (nextdata)['daily'][i]['humidity'] + "% humidity </div>");
                     var boxWind = $("<div>" + (nextdata)['daily'][i]['wind_speed'] + "mph wind</div>");
                     var boxUV = $("<div>" + (nextdata)['daily'][i]['uvi'] + "UV index</div>");
@@ -77,11 +87,27 @@ $("#citysearchbtn").on("click", function() {
                     $("#fiveblocks").children().eq(i).children().append(boxUV);
                     $("#fiveblocks").children().eq(i).children().append(boxIcon);
 
+                    if (Math.floor((nextdata)['daily'][i]['temp']['day']) > 85) {
+                        $("#fiveblocks").children().eq(i).addClass("card col s2 red lighten-2");
+                    } else if (Math.floor((nextdata)['daily'][i]['temp']['day']) > 70) {
+                        $("#fiveblocks").children().eq(i).addClass("card col s2 red lighten-4");
+                    } else if (Math.floor((nextdata)['daily'][i]['temp']['day']) > 40) {
+                        $("#fiveblocks").children().eq(i).addClass("card col s2 purple lighten-4");
+                    } else {
+                        $("#fiveblocks").children().eq(i).addClass("card col s2 blue lighten-4");
+                    };
+                    if ((nextdata)['daily'][i]['uvi'] > 7) {
+                        $("#fiveblocks").children().eq(i).children().children().eq(4).addClass("white-text red darken-2");
+                    } else if ((nextdata)['daily'][i]['uvi'] > 3) {
+                        $("#fiveblocks").children().eq(i).children().children().eq(4).addClass("white-text yellow darken-2")
+                    } else {
+                        $("#fiveblocks").children().eq(i).children().children().eq(4).addClass("white-text green darken-2")
 
-                  
-
-                    ;
+                    }
+                    
                 }
+
+                
             })
 
     
@@ -89,9 +115,3 @@ $("#citysearchbtn").on("click", function() {
 }
 });
 
-$(".recent-city").on("click", function() {
-    console.log(this);
-    console.log(this.val());
-    console.log(this.text());
-    $("#searchbox").val("test");
-})
