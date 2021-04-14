@@ -1,0 +1,10 @@
+#rightbar {
+    padding-left: 50px;
+}
+
+#fiveblocks {
+    display: flex;
+    flex-direction: row;
+    align-content: space-around;
+    justify-content: center;
+}
