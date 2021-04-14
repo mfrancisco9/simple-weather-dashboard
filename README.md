@@ -5,6 +5,8 @@ User is able to use the box and button in the top left to submit a city name. Th
 
 Recent searchs are saved in local storage, and if local storage exists they will automatically populate in the left-hand column. 
 
-![image of chicago screenshot]()
-![image of edmonton screenshot]()
-![image of tehran screenshot]()
+![image of chicago screenshot](https://github.com/mfrancisco9/simple-weather-dashboard/blob/main/images/chicago.JPG)
+![image of edmonton screenshot](https://github.com/mfrancisco9/simple-weather-dashboard/blob/main/images/edmonton.JPG)
+![image of tehran screenshot](https://github.com/mfrancisco9/simple-weather-dashboard/blob/main/images/Tehran.JPG)
+
+Page is currently deployed at [Github](https://mfrancisco9.github.io/simple-weather-dashboard/)
