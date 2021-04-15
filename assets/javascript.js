@@ -111,3 +111,9 @@ $("#citysearchbtn").on("click", function() {
 }
 });
 
+// recent searches into searchbox was completed with help from Zach Duty
+
+$(".recent-city").on("click", function(event) {
+    event.stopPropagation();
+    $("#searchbox").val(event.target.innerHTML);
+})

@@ -9,4 +9,6 @@ Recent searchs are saved in local storage, and if local storage exists they will
 ![image of edmonton screenshot](https://github.com/mfrancisco9/simple-weather-dashboard/blob/main/images/edmonton.JPG)
 ![image of tehran screenshot](https://github.com/mfrancisco9/simple-weather-dashboard/blob/main/images/Tehran.JPG)
 
+Assistance with having the recent searches set values for the searchbox upon click came from Zach Duty.
+
 Page is currently deployed at [Github](https://mfrancisco9.github.io/simple-weather-dashboard/)
